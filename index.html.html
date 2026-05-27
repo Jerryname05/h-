@@ -1,0 +1,1601 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>书香校园 AI 定价与谈判支持方案</title>
+  <style>
+    :root {
+      --ink: #172133;
+      --muted: #657286;
+      --paper: #f8fbf7;
+      --panel: rgba(255, 255, 255, 0.86);
+      --line: rgba(23, 33, 51, 0.12);
+      --teal: #00a7a7;
+      --cyan: #37f1ff;
+      --blue: #2457d6;
+      --deep: #071934;
+      --gold: #f5b83d;
+      --coral: #ff6b57;
+      --leaf: #58a55c;
+      --shadow: 0 24px 70px rgba(22, 36, 60, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at 14% 8%, rgba(55, 241, 255, 0.2), transparent 26rem),
+        radial-gradient(circle at 88% 8%, rgba(36, 87, 214, 0.28), transparent 27rem),
+        linear-gradient(135deg, #06162e 0%, #0b2c51 42%, #eef8f4 100%);
+      min-height: 100vh;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .poster {
+      width: min(1180px, calc(100% - 32px));
+      margin: 24px auto;
+      border: 1px solid rgba(36, 87, 214, 0.18);
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.95), rgba(248, 253, 255, 0.82)),
+        repeating-linear-gradient(90deg, rgba(36, 87, 214, 0.04) 0 1px, transparent 1px 94px);
+      box-shadow: 0 28px 86px rgba(0, 10, 32, 0.36);
+      overflow: hidden;
+    }
+
+    .hero {
+      min-height: 620px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(360px, 0.96fr);
+      gap: 34px;
+      align-items: center;
+      padding: 50px clamp(24px, 5vw, 72px) 36px;
+      position: relative;
+      isolation: isolate;
+      color: white;
+      background:
+        radial-gradient(circle at 52% 68%, rgba(0, 224, 255, 0.24), transparent 19rem),
+        linear-gradient(90deg, rgba(3, 16, 39, 0.98), rgba(5, 34, 67, 0.88) 58%, rgba(4, 15, 35, 0.96)),
+        linear-gradient(135deg, #071934, #0a315b);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(90deg, rgba(55, 241, 255, 0.15) 0 1px, transparent 1px 72px),
+        linear-gradient(0deg, rgba(55, 241, 255, 0.08) 0 1px, transparent 1px 72px),
+        radial-gradient(circle at 50% 82%, rgba(55, 241, 255, 0.16), transparent 23rem);
+      opacity: 0.72;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--cyan), var(--blue), var(--teal), var(--cyan));
+      box-shadow: 0 0 22px rgba(55, 241, 255, 0.76);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 11px;
+      border: 1px solid rgba(55, 241, 255, 0.42);
+      border-radius: 999px;
+      background: rgba(4, 31, 62, 0.72);
+      color: #9dfaff;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 18px;
+      box-shadow: inset 0 0 18px rgba(55, 241, 255, 0.12), 0 0 24px rgba(55, 241, 255, 0.14);
+    }
+
+    .pulse {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 0 8px rgba(55, 241, 255, 0.13), 0 0 16px rgba(55, 241, 255, 0.78);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 620px;
+      font-size: clamp(38px, 4.7vw, 68px);
+      line-height: 1.04;
+      letter-spacing: 0;
+      color: #f5fbff;
+      text-shadow: 0 0 28px rgba(55, 241, 255, 0.26);
+    }
+
+    h1 span {
+      display: block;
+    }
+
+    .title-accent {
+      display: inline-block;
+      margin-left: 10px;
+      color: #8ffbff;
+      font-size: 0.74em;
+      vertical-align: 0.08em;
+      text-shadow: 0 0 22px rgba(55, 241, 255, 0.52);
+    }
+
+    .subtitle {
+      max-width: 700px;
+      margin: 18px 0 0;
+      color: rgba(229, 247, 255, 0.86);
+      font-size: clamp(16px, 1.55vw, 19px);
+      line-height: 1.72;
+    }
+
+    .task-line {
+      max-width: 760px;
+      margin: 14px 0 0;
+      padding-left: 14px;
+      border-left: 3px solid var(--cyan);
+      color: #9dfaff;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.6;
+      text-shadow: 0 0 18px rgba(55, 241, 255, 0.2);
+    }
+
+    .hero-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .hero-point {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      color: #d9fbff;
+      background: rgba(55, 241, 255, 0.09);
+      border: 1px solid rgba(55, 241, 255, 0.26);
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: inset 0 0 16px rgba(55, 241, 255, 0.08);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .action {
+      min-height: 44px;
+      border: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      padding: 0 18px;
+      color: white;
+      background: linear-gradient(135deg, #0ea5bd, #2457d6);
+      box-shadow: 0 0 24px rgba(55, 241, 255, 0.22), 0 12px 28px rgba(0, 5, 20, 0.32);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .action.secondary {
+      color: #d9fbff;
+      background: rgba(5, 24, 49, 0.62);
+      border: 1px solid rgba(55, 241, 255, 0.24);
+      box-shadow: none;
+    }
+
+    .action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 34px rgba(23, 33, 51, 0.19);
+    }
+
+    .visual-stage {
+      min-height: 520px;
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+
+    .visual-stage::before,
+    .visual-stage::after {
+      content: "";
+      position: absolute;
+      top: 14%;
+      width: 86px;
+      height: 64%;
+      border: 1px solid rgba(55, 241, 255, 0.18);
+      background:
+        repeating-linear-gradient(0deg, rgba(155, 219, 255, 0.16) 0 4px, transparent 4px 38px),
+        linear-gradient(90deg, rgba(9, 42, 79, 0.72), rgba(11, 70, 116, 0.36));
+      box-shadow: inset 0 0 22px rgba(55, 241, 255, 0.1), 0 0 24px rgba(55, 241, 255, 0.08);
+      opacity: 0.38;
+      z-index: -1;
+    }
+
+    .visual-stage::before {
+      left: -7%;
+      transform: perspective(500px) rotateY(18deg);
+    }
+
+    .visual-stage::after {
+      right: -9%;
+      transform: perspective(500px) rotateY(-18deg);
+    }
+
+    .book-scene {
+      width: min(520px, 100%);
+      aspect-ratio: 1 / 1;
+      position: relative;
+      display: grid;
+      place-items: center;
+      perspective: 900px;
+    }
+
+    .book-scene::before {
+      content: "";
+      position: absolute;
+      width: 72%;
+      height: 36%;
+      top: 18%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(55, 241, 255, 0.24), transparent 58%),
+        repeating-radial-gradient(circle, rgba(55, 241, 255, 0.18) 0 2px, transparent 2px 16px);
+      filter: blur(0.2px);
+      animation: haloPulse 3.7s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    .book {
+      width: 86%;
+      height: 42%;
+      position: absolute;
+      bottom: 14%;
+      transform-style: preserve-3d;
+      transform: rotateX(55deg) rotateZ(-2deg);
+      filter: drop-shadow(0 0 20px rgba(55, 241, 255, 0.28)) drop-shadow(0 28px 28px rgba(0, 5, 20, 0.48));
+      z-index: 2;
+    }
+
+    .book::before {
+      content: "";
+      position: absolute;
+      left: 4%;
+      right: 4%;
+      bottom: -13px;
+      height: 24px;
+      border-radius: 0 0 18px 18px;
+      background: linear-gradient(90deg, #9b7440, #f1e2b5 48%, #8c6835);
+      box-shadow: inset 0 -8px 12px rgba(41, 25, 8, 0.28);
+      transform: translateZ(-18px);
+    }
+
+    .book::after {
+      content: "";
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      bottom: -20px;
+      height: 9px;
+      border-radius: 999px;
+      background: rgba(0, 7, 22, 0.48);
+      filter: blur(5px);
+      transform: translateZ(-30px);
+    }
+
+    .page {
+      position: absolute;
+      top: 3%;
+      width: 50.5%;
+      height: 88%;
+      border: 1px solid rgba(78, 54, 20, 0.15);
+      background:
+        linear-gradient(100deg, rgba(255, 255, 255, 0.34), transparent 16%),
+        repeating-linear-gradient(0deg, transparent 0 11px, rgba(78, 54, 20, 0.11) 12px 13px),
+        linear-gradient(120deg, #fffaf0 0%, #f5e9cd 62%, #d8c095 100%);
+      box-shadow: inset 0 -12px 18px rgba(100, 72, 33, 0.16);
+    }
+
+    .page.left {
+      left: 0;
+      border-radius: 22px 5px 8px 22px;
+      transform-origin: right center;
+      transform: rotateY(18deg) rotateZ(1deg);
+      clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 92%);
+    }
+
+    .page.right {
+      right: 0;
+      border-radius: 5px 22px 22px 8px;
+      transform-origin: left center;
+      transform: rotateY(-18deg) rotateZ(-1deg);
+      clip-path: polygon(0 0, 100% 5%, 100% 92%, 0 100%);
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      top: 8%;
+      bottom: 10%;
+      width: 28px;
+      background: linear-gradient(90deg, rgba(83, 55, 20, 0.18), transparent);
+      opacity: 0.7;
+    }
+
+    .page.left::before {
+      right: 0;
+    }
+
+    .page.right::before {
+      left: 0;
+      transform: scaleX(-1);
+    }
+
+    .spine {
+      position: absolute;
+      left: 48.7%;
+      top: 1%;
+      width: 2.6%;
+      height: 91%;
+      background: linear-gradient(90deg, #8d6129, #f2d286 45%, #674318);
+      border-radius: 99px;
+      box-shadow: 0 0 12px rgba(55, 241, 255, 0.26), inset 0 0 8px rgba(44, 24, 4, 0.42);
+      z-index: 4;
+    }
+
+    .data-arc {
+      position: absolute;
+      width: 58%;
+      height: 34%;
+      top: 24%;
+      border: 3px solid rgba(55, 241, 255, 0.52);
+      border-bottom: 0;
+      border-radius: 240px 240px 0 0;
+      transform: rotateX(64deg);
+      animation: scan 3.8s ease-in-out infinite;
+      box-shadow: 0 -10px 22px rgba(55, 241, 255, 0.22);
+      z-index: 1;
+    }
+
+    .data-arc:nth-of-type(2) {
+      width: 46%;
+      top: 28%;
+      border-color: rgba(97, 137, 255, 0.62);
+      animation-delay: 600ms;
+    }
+
+    .cube {
+      position: absolute;
+      top: 3%;
+      right: 7%;
+      width: 88px;
+      height: 88px;
+      transform-style: preserve-3d;
+      animation: floatCube 5s ease-in-out infinite;
+      opacity: 0.72;
+      z-index: 0;
+    }
+
+    .cube::before,
+    .cube::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 2px solid rgba(0, 167, 167, 0.68);
+      background: rgba(255, 255, 255, 0.24);
+      backdrop-filter: blur(8px);
+      box-shadow: inset 0 0 24px rgba(55, 241, 255, 0.32), 0 0 30px rgba(55, 241, 255, 0.26), 0 18px 36px rgba(36, 87, 214, 0.22);
+    }
+
+    .cube::before {
+      transform: rotateY(35deg) rotateX(18deg);
+    }
+
+    .cube::after {
+      transform: translate(18px, 18px) rotateY(35deg) rotateX(18deg);
+      opacity: 0.46;
+    }
+
+    .ai-mark {
+      position: absolute;
+      top: 36px;
+      right: 25px;
+      z-index: 4;
+      color: #70fbff;
+      font-size: 25px;
+      font-weight: 900;
+      text-shadow: 0 0 18px rgba(0, 214, 201, 0.7);
+    }
+
+    .tag {
+      position: absolute;
+      left: 6%;
+      top: 17%;
+      width: 190px;
+      border-radius: 8px;
+      padding: 16px;
+      background: rgba(5, 28, 58, 0.78);
+      border: 1px solid rgba(55, 241, 255, 0.36);
+      box-shadow: inset 0 0 24px rgba(55, 241, 255, 0.1), 0 0 30px rgba(55, 241, 255, 0.14), 0 18px 40px rgba(0, 5, 20, 0.24);
+      backdrop-filter: blur(8px);
+      z-index: 3;
+    }
+
+    .tag strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #8ffbff;
+      font-size: 20px;
+    }
+
+    .tag span {
+      color: rgba(232, 249, 255, 0.78);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .bot {
+      position: absolute;
+      right: 8%;
+      bottom: 0;
+      width: 172px;
+      height: 172px;
+      z-index: 6;
+      filter: drop-shadow(0 0 28px rgba(55, 241, 255, 0.42));
+      animation: none;
+    }
+
+    .bot-ring {
+      position: absolute;
+      inset: 0;
+      width: 172px;
+      height: 172px;
+      border-radius: 50%;
+      border: 3px solid rgba(55, 241, 255, 0.78);
+      background:
+        radial-gradient(circle at 50% 42%, rgba(55, 241, 255, 0.2), transparent 44%),
+        radial-gradient(circle at 72% 18%, rgba(255, 255, 255, 0.22), transparent 10%),
+        rgba(9, 58, 106, 0.36);
+      box-shadow: inset 0 0 28px rgba(55, 241, 255, 0.25), 0 0 34px rgba(55, 241, 255, 0.32);
+    }
+
+    .bot-ring::after {
+      content: "";
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: -12px;
+      height: 48px;
+      border-bottom: 7px solid rgba(55, 241, 255, 0.78);
+      border-radius: 50%;
+      transform: rotate(-19deg);
+    }
+
+    .bot-head {
+      position: absolute;
+      left: 45px;
+      top: 52px;
+      width: 82px;
+      height: 64px;
+      border-radius: 26px;
+      background: linear-gradient(145deg, #eefcff, #72d6ff);
+      border: 2px solid rgba(255, 255, 255, 0.76);
+      box-shadow: inset 0 -12px 22px rgba(36, 87, 214, 0.26), 0 0 20px rgba(55, 241, 255, 0.26);
+    }
+
+    .bot-head::selection {
+      background: transparent;
+    }
+
+    .bot-head::before,
+    .bot-head::after {
+      content: "";
+      position: absolute;
+      top: 27px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #00e4ff;
+      box-shadow: 0 0 14px rgba(0, 228, 255, 0.9);
+    }
+
+    .bot-head::before {
+      left: 21px;
+    }
+
+    .bot-head::after {
+      right: 21px;
+    }
+
+    .bot-face {
+      position: absolute;
+      left: 53px;
+      top: 60px;
+      width: 66px;
+      height: 44px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #07224a, #0b3d77);
+      box-shadow: inset 0 0 18px rgba(55, 241, 255, 0.18);
+      z-index: 1;
+    }
+
+    .bot-face::before,
+    .bot-face::after {
+      content: "";
+      position: absolute;
+      top: 17px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #31ecff;
+      box-shadow: 0 0 12px rgba(49, 236, 255, 0.95);
+    }
+
+    .bot-face::before {
+      left: 16px;
+    }
+
+    .bot-face::after {
+      right: 16px;
+    }
+
+    .bot-smile {
+      position: absolute;
+      left: 78px;
+      top: 89px;
+      width: 18px;
+      height: 10px;
+      border-bottom: 3px solid #8dffff;
+      border-radius: 0 0 18px 18px;
+      z-index: 2;
+    }
+
+    .bot-antenna {
+      position: absolute;
+      left: 82px;
+      top: 31px;
+      width: 7px;
+      height: 20px;
+      border-radius: 99px;
+      background: #99faff;
+      box-shadow: 0 0 12px rgba(55, 241, 255, 0.68);
+    }
+
+    .bot-antenna::before {
+      content: "";
+      position: absolute;
+      left: -5px;
+      top: -10px;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: #37f1ff;
+      box-shadow: 0 0 18px rgba(55, 241, 255, 0.92);
+    }
+
+    .bot-body {
+      position: absolute;
+      left: 58px;
+      top: 114px;
+      width: 56px;
+      height: 36px;
+      border-radius: 14px 14px 24px 24px;
+      background: linear-gradient(145deg, #6cdaff, #effcff);
+      border: 2px solid rgba(255, 255, 255, 0.72);
+      box-shadow: inset 0 -8px 14px rgba(36, 87, 214, 0.18);
+    }
+
+    .bot-body::before,
+    .bot-body::after {
+      content: "";
+      position: absolute;
+      top: 8px;
+      width: 20px;
+      height: 8px;
+      border-radius: 99px;
+      background: rgba(153, 250, 255, 0.94);
+    }
+
+    .bot-body::before {
+      left: -18px;
+      transform: rotate(-28deg);
+    }
+
+    .bot-body::after {
+      right: -18px;
+      transform: rotate(28deg);
+    }
+
+    .bot-ear {
+      position: absolute;
+      top: 73px;
+      width: 17px;
+      height: 36px;
+      border-radius: 14px;
+      background: linear-gradient(145deg, #dffaff, #61d1ff);
+      border: 2px solid rgba(255, 255, 255, 0.64);
+      box-shadow: inset 0 -8px 12px rgba(36, 87, 214, 0.2);
+    }
+
+    .bot-ear.left {
+      left: 31px;
+    }
+
+    .bot-ear.right {
+      right: 31px;
+    }
+
+    .bot-scarf {
+      position: absolute;
+      left: 31px;
+      bottom: 18px;
+      width: 86px;
+      height: 28px;
+      border-radius: 70% 18px 70% 18px;
+      background: linear-gradient(135deg, rgba(184, 237, 255, 0.86), rgba(76, 148, 255, 0.56));
+      transform: rotate(-18deg);
+      box-shadow: 0 8px 18px rgba(0, 10, 32, 0.18);
+    }
+
+    .bot-bubble {
+      display: none;
+    }
+
+    .section {
+      padding: 48px clamp(24px, 5vw, 72px);
+    }
+
+    .section.alt {
+      background:
+        linear-gradient(90deg, rgba(235, 250, 255, 0.74), rgba(255, 255, 255, 0.56)),
+        linear-gradient(0deg, rgba(36, 87, 214, 0.035) 0 1px, transparent 1px 56px);
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 46px);
+      letter-spacing: 0;
+    }
+
+    .section-title p {
+      margin: 0;
+      max-width: 520px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .info-card {
+      min-height: 230px;
+      border-radius: 8px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(235, 249, 255, 0.78));
+      border: 1px solid color-mix(in srgb, var(--accent) 36%, rgba(23, 33, 51, 0.12));
+      padding: 22px;
+      box-shadow: inset 0 0 22px color-mix(in srgb, var(--accent) 8%, transparent), 0 18px 38px rgba(23, 33, 51, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background:
+        linear-gradient(90deg, color-mix(in srgb, var(--accent) 34%, transparent) 0 1px, transparent 1px 26px),
+        linear-gradient(0deg, color-mix(in srgb, var(--accent) 18%, transparent) 0 1px, transparent 1px 26px);
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    .info-card::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 5px;
+      background: var(--accent);
+    }
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--accent) 16%, white);
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .icon svg {
+      width: 25px;
+      height: 25px;
+      stroke: currentColor;
+      stroke-width: 2.3;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .info-card h3 {
+      margin: 0 0 12px;
+      font-size: 23px;
+    }
+
+    .highlight {
+      display: inline;
+      background: linear-gradient(transparent 58%, rgba(245, 184, 61, 0.55) 58%);
+      font-weight: 800;
+    }
+
+    .info-card p,
+    .info-card li {
+      color: #4d5a70;
+      line-height: 1.72;
+      font-size: 16px;
+    }
+
+    .info-card ul {
+      padding-left: 20px;
+      margin: 0;
+    }
+
+    .simulator {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.94fr) minmax(360px, 1.06fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .control-panel,
+    .result-panel,
+    .roles-panel,
+    .talk-panel {
+      border: 1px solid rgba(36, 170, 214, 0.22);
+      border-radius: 8px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(237, 249, 255, 0.74));
+      box-shadow: inset 0 0 24px rgba(55, 241, 255, 0.06), 0 18px 38px rgba(23, 33, 51, 0.08);
+    }
+
+    .control-panel,
+    .result-panel {
+      padding: 24px;
+    }
+
+    .field {
+      margin-bottom: 22px;
+    }
+
+    .field-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      color: #263650;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .field-head output {
+      color: #087777;
+      font-variant-numeric: tabular-nums;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--teal);
+      cursor: pointer;
+    }
+
+    .result-price {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 18px;
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 83% 18%, rgba(55, 241, 255, 0.32), transparent 13rem),
+        linear-gradient(135deg, #061934, #0a8790);
+      color: white;
+      margin-bottom: 18px;
+      box-shadow: inset 0 0 32px rgba(55, 241, 255, 0.16), 0 0 22px rgba(55, 241, 255, 0.12);
+    }
+
+    .result-price span {
+      display: block;
+      opacity: 0.78;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .result-price strong {
+      font-size: clamp(44px, 6vw, 76px);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .badge {
+      border-radius: 999px;
+      padding: 9px 13px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      white-space: nowrap;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .formula {
+      border: 1px dashed rgba(8, 119, 119, 0.4);
+      border-radius: 8px;
+      padding: 16px;
+      color: #31405a;
+      line-height: 1.7;
+      background: #f7fffb;
+      margin-bottom: 16px;
+    }
+
+    .formula code {
+      font-family: "SFMono-Regular", Consolas, monospace;
+      color: #0a7775;
+      font-weight: 800;
+      white-space: normal;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      border-radius: 999px;
+      border: 1px solid transparent;
+      padding: 9px 13px;
+      background: var(--chip-bg, #fff);
+      color: var(--chip-ink, #173d6f);
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 9px 20px rgba(23, 33, 51, 0.11);
+      cursor: default;
+      transform-origin: center;
+      transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+    }
+
+    .chip:nth-child(1) {
+      --chip-bg: #dff8f4;
+      --chip-ink: #047a78;
+      border-color: rgba(0, 167, 167, 0.26);
+    }
+
+    .chip:nth-child(2) {
+      --chip-bg: #fff0c7;
+      --chip-ink: #8a5a00;
+      border-color: rgba(245, 184, 61, 0.34);
+    }
+
+    .chip:nth-child(3) {
+      --chip-bg: #ffe4df;
+      --chip-ink: #9d3327;
+      border-color: rgba(255, 107, 87, 0.28);
+    }
+
+    .chip:nth-child(4) {
+      --chip-bg: #e5ecff;
+      --chip-ink: #2442a4;
+      border-color: rgba(36, 87, 214, 0.24);
+    }
+
+    .chip:hover {
+      transform: translateY(-3px) scale(1.09);
+      box-shadow: 0 16px 32px rgba(23, 33, 51, 0.18);
+      filter: saturate(1.14);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .tab {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      min-height: 40px;
+      padding: 0 14px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.76);
+      color: #34435c;
+      font-weight: 800;
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .tab.active {
+      color: white;
+      background: linear-gradient(135deg, #0d7f9a, #2457d6);
+      border-color: rgba(55, 241, 255, 0.54);
+      box-shadow: 0 0 20px rgba(55, 241, 255, 0.22);
+    }
+
+    .tab:hover {
+      transform: translateY(-2px);
+      border-color: rgba(55, 241, 255, 0.48);
+    }
+
+    .tool-detail {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(180px, 0.52fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .tool-copy,
+    .score-box {
+      border-radius: 8px;
+      border: 1px solid rgba(36, 170, 214, 0.18);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(238, 249, 255, 0.74));
+      padding: 20px;
+    }
+
+    .tool-copy h3,
+    .score-box h3 {
+      margin: 0 0 12px;
+      font-size: 24px;
+    }
+
+    .tool-copy p {
+      color: #4d5a70;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .meter {
+      height: 12px;
+      border-radius: 999px;
+      background: #e8eef3;
+      overflow: hidden;
+      margin-top: 16px;
+    }
+
+    .meter span {
+      display: block;
+      height: 100%;
+      width: var(--score);
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--coral), var(--gold), var(--teal));
+    }
+
+    .roles-panel {
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .role {
+      min-height: 156px;
+      border-radius: 8px;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--line);
+    }
+
+    .role h3 {
+      margin: 0 0 12px;
+      font-size: 24px;
+    }
+
+    .role p {
+      margin: 0;
+      color: #4d5a70;
+      line-height: 1.7;
+    }
+
+    .orbit {
+      width: 210px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 2px solid rgba(36, 87, 214, 0.17);
+      display: grid;
+      place-items: center;
+      position: relative;
+      box-shadow: 0 0 28px rgba(55, 241, 255, 0.12);
+    }
+
+    .orbit::before {
+      content: "";
+      width: 138px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 2px solid rgba(55, 241, 255, 0.38);
+      position: absolute;
+    }
+
+    .orbit span {
+      position: relative;
+      z-index: 1;
+      width: 118px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 16px;
+      color: white;
+      font-weight: 900;
+      line-height: 1.35;
+      background: linear-gradient(135deg, #173d6f, #0b9290);
+      box-shadow: inset 0 0 24px rgba(55, 241, 255, 0.18), 0 18px 34px rgba(0, 167, 167, 0.18);
+    }
+
+    .talk-panel {
+      padding: 24px;
+    }
+
+    .talk-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .select-row {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 46px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.75);
+      cursor: pointer;
+      color: #34435c;
+      font-weight: 750;
+    }
+
+    .option input {
+      accent-color: var(--teal);
+    }
+
+    .speech {
+      min-height: 254px;
+      border-radius: 8px;
+      padding: 22px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(238, 248, 244, 0.86)),
+        linear-gradient(90deg, rgba(245, 184, 61, 0.12), transparent);
+      border: 1px solid rgba(0, 167, 167, 0.2);
+    }
+
+    .speech h3 {
+      margin: 0 0 12px;
+      font-size: 24px;
+    }
+
+    .speech p {
+      margin: 0;
+      color: #34435c;
+      line-height: 1.85;
+      font-size: 18px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      padding: 24px clamp(24px, 5vw, 72px);
+      background: #12203a;
+      color: white;
+    }
+
+    .footer strong {
+      color: #95fff6;
+    }
+
+    .footer p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.72);
+      line-height: 1.6;
+    }
+
+    @keyframes floatCube {
+      0%,
+      100% {
+        transform: translateY(0) rotateZ(0deg);
+      }
+      50% {
+        transform: translateY(-18px) rotateZ(3deg);
+      }
+    }
+
+    @keyframes botFloat {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-14px);
+      }
+    }
+
+    @keyframes haloPulse {
+      0%,
+      100% {
+        opacity: 0.52;
+        transform: scale(0.95);
+      }
+      50% {
+        opacity: 0.95;
+        transform: scale(1.04);
+      }
+    }
+
+    @keyframes scan {
+      0%,
+      100% {
+        opacity: 0.35;
+        transform: rotateX(64deg) translateY(0);
+      }
+      50% {
+        opacity: 0.95;
+        transform: rotateX(64deg) translateY(-18px);
+      }
+    }
+
+    @media (max-width: 920px) {
+      .hero,
+      .simulator,
+      .talk-layout,
+      .tool-detail,
+      .roles-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .visual-stage {
+        min-height: 420px;
+      }
+
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .orbit {
+        justify-self: center;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .poster {
+        width: 100%;
+        margin: 0;
+        border-left: 0;
+        border-right: 0;
+      }
+
+      .hero,
+      .section {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .tag {
+        position: static;
+        width: 100%;
+        align-self: start;
+      }
+
+      .cube {
+        width: 96px;
+        height: 96px;
+      }
+
+      .visual-stage::before,
+      .visual-stage::after {
+        display: none;
+      }
+
+      .bot {
+        right: 0;
+        bottom: 0;
+        transform: scale(0.86);
+      }
+
+      .bot-bubble {
+        display: none;
+      }
+
+      .ai-mark {
+        top: 29px;
+        right: 26px;
+      }
+
+      .result-price {
+        grid-template-columns: 1fr;
+      }
+
+      .footer {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .poster {
+        width: 100%;
+        margin: 0;
+        box-shadow: none;
+      }
+
+      .hero-actions {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="poster">
+    <section class="hero" id="top">
+      <div>
+        <div class="eyebrow"><span class="pulse"></span>实战任务：设计 AI 定价与谈判支持方案</div>
+        <h1><span>校园二手书平台</span><span><b class="title-accent">&amp;</b> 智能定价</span></h1>
+        <p class="subtitle">
+          书香校园 AI 定价与谈判支持方案：把“该卖多少钱”“该用什么工具”“如何谈判”变成可解释、可互动、可演示的完整方案。
+        </p>
+        <p class="task-line">实战任务发布：为“书香校园”小程序设计 AI 定价与谈判支持方案。</p>
+        <div class="hero-points" aria-label="方案关键词">
+          <span class="hero-point">智能定价</span>
+          <span class="hero-point">可议价区间</span>
+          <span class="hero-point">AI 话术辅助</span>
+        </div>
+        <div class="hero-actions">
+          <button class="action" data-jump="#sim">试算一本书的价格</button>
+          <button class="action secondary" data-jump="#talk">生成谈判话术</button>
+        </div>
+      </div>
+      <div class="visual-stage" aria-label="AI 图书定价视觉">
+        <div class="book-scene">
+          <div class="data-arc"></div>
+          <div class="data-arc"></div>
+          <div class="cube"><span class="ai-mark">AI</span></div>
+          <div class="book" aria-hidden="true">
+            <span class="page left"></span>
+            <span class="spine"></span>
+            <span class="page right"></span>
+          </div>
+          <div class="tag">
+            <strong>核心输入</strong>
+            <span>书籍原价、成色、需求热度、学期阶段共同决定建议价区间。</span>
+          </div>
+          <div class="bot" aria-label="固定在右下角的 AI 陪伴机器人">
+            <div class="bot-bubble">我来辅助定价和回复买家</div>
+            <span class="bot-ring"></span>
+            <span class="bot-antenna"></span>
+            <span class="bot-ear left"></span>
+            <span class="bot-ear right"></span>
+            <span class="bot-head"></span>
+            <span class="bot-face"></span>
+            <span class="bot-smile"></span>
+            <span class="bot-body"></span>
+            <span class="bot-scarf"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="section-title">
+        <h2>输出要求</h2>
+        <p>把老师要求拆成三块：定价模型、工具选择、谈判支持。每一块都能在展示时被解释清楚。</p>
+      </div>
+      <div class="grid-3">
+        <article class="info-card" style="--accent: var(--teal)">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 16v-5"/><path d="M13 16V8"/><path d="M18 16v-3"/></svg>
+          </div>
+          <h3>定价模型</h3>
+          <p><span class="highlight">AI 定价公式</span>：建议价 = 原价 × 成色系数 × 需求系数 × 学期系数，再给出可谈判区间。</p>
+        </article>
+        <article class="info-card" style="--accent: var(--gold)">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 12l8-4.5"/><path d="M12 12v9"/><path d="M12 12L4 7.5"/></svg>
+          </div>
+          <h3>工具选择</h3>
+          <p><span class="highlight">三类工具</span>：动态定价、对标检索、成本中心。系统根据场景推荐最合适的 AI 辅助方式。</p>
+        </article>
+        <article class="info-card" style="--accent: var(--coral)">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M7 8h10"/><path d="M7 12h6"/><path d="M5 20l3-3h9a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7a3 3 0 0 0 3 3"/></svg>
+          </div>
+          <h3>谈判支持</h3>
+          <p><span class="highlight">一句 AI 自动生成话术</span>：不生硬、不重复，用“理由 + 让步 + 购买建议”回应买家的压价。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="sim">
+      <div class="section-title">
+        <h2>AI 定价试算器</h2>
+        <p>拖动参数即可看到建议价变化，适合课堂展示时现场演示“为什么这本书值这个价”。</p>
+      </div>
+      <div class="simulator">
+        <div class="control-panel">
+          <div class="field">
+            <div class="field-head"><label for="origin">书籍原价</label><output id="originOut">68 元</output></div>
+            <input id="origin" type="range" min="20" max="160" value="68">
+          </div>
+          <div class="field">
+            <div class="field-head"><label for="condition">新旧程度</label><output id="conditionOut">85%</output></div>
+            <input id="condition" type="range" min="45" max="98" value="85">
+          </div>
+          <div class="field">
+            <div class="field-head"><label for="demand">课程需求热度</label><output id="demandOut">80%</output></div>
+            <input id="demand" type="range" min="50" max="120" value="80">
+          </div>
+          <div class="field">
+            <div class="field-head"><label for="term">学期阶段影响</label><output id="termOut">95%</output></div>
+            <input id="term" type="range" min="70" max="125" value="95">
+          </div>
+        </div>
+        <div class="result-panel">
+          <div class="result-price">
+            <div>
+              <span>AI 建议成交价</span>
+              <strong id="price">43</strong>
+            </div>
+            <div class="badge" id="range">可谈区间 39-47 元</div>
+          </div>
+          <div class="formula">
+            <code id="formulaText">68 × 0.85 × 0.80 × 0.95 = 43.9</code><br>
+            系统保留 8% 左右浮动空间，方便卖家让价，也避免买家觉得价格没有弹性。
+          </div>
+          <div class="chips" id="chips">
+            <span class="chip">适合标注：考研教材</span>
+            <span class="chip">推荐策略：先报 47 元</span>
+            <span class="chip">底线提醒：不低于 39 元</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="section-title">
+        <h2>工具选择逻辑</h2>
+        <p>点击切换三种 AI 工具，展示它们分别解决“价格变化、市场对比、成本评估”的问题。</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="AI 工具选择">
+        <button class="tab active" data-tool="dynamic">动态定价</button>
+        <button class="tab" data-tool="benchmark">对标检索</button>
+        <button class="tab" data-tool="cost">成本中心</button>
+      </div>
+      <div class="tool-detail">
+        <div class="tool-copy">
+          <h3 id="toolTitle">动态定价工具</h3>
+          <p id="toolText">根据学期阶段、课程热度和库存变化实时调整价格。开学季需求高，价格上浮；期末清仓，价格下调，提高成交率。</p>
+        </div>
+        <div class="score-box">
+          <h3 id="toolScore">推荐指数 92</h3>
+          <div class="meter" style="--score: 92%"><span></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="talk">
+      <div class="section-title">
+        <h2>谈判话术生成器</h2>
+        <p>根据买家压价理由，自动生成一段更自然的回复，避免“这书太旧了，不能便宜点吗”的机械回答。</p>
+      </div>
+      <div class="talk-panel">
+        <div class="talk-layout">
+          <div>
+            <div class="select-row" id="reasonGroup">
+              <label class="option"><input type="radio" name="reason" value="old" checked> 买家说：书有点旧，能便宜吗？</label>
+              <label class="option"><input type="radio" name="reason" value="budget"> 买家说：我预算有限，可以再低一点吗？</label>
+              <label class="option"><input type="radio" name="reason" value="compare"> 买家说：别人卖得好像更便宜。</label>
+            </div>
+            <button class="action" id="refreshTalk">换一种表达</button>
+          </div>
+          <div class="speech">
+            <h3>AI 建议回复</h3>
+            <p id="speechText"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p><strong>方案一句话：</strong>用可解释 AI 帮校园二手书从“凭感觉定价”升级为“有依据、有弹性、有话术”。</p>
+      <p>第13组 · HTML 交互海报</p>
+    </footer>
+  </main>
+
+  <script>
+    const $ = (selector) => document.querySelector(selector);
+    const sliders = {
+      origin: $("#origin"),
+      condition: $("#condition"),
+      demand: $("#demand"),
+      term: $("#term")
+    };
+
+    function updatePrice() {
+      const origin = Number(sliders.origin.value);
+      const condition = Number(sliders.condition.value) / 100;
+      const demand = Number(sliders.demand.value) / 100;
+      const term = Number(sliders.term.value) / 100;
+      const raw = origin * condition * demand * term;
+      const price = Math.max(8, Math.round(raw));
+      const low = Math.round(price * 0.9);
+      const high = Math.round(price * 1.08);
+
+      $("#originOut").textContent = `${origin} 元`;
+      $("#conditionOut").textContent = `${Math.round(condition * 100)}%`;
+      $("#demandOut").textContent = `${Math.round(demand * 100)}%`;
+      $("#termOut").textContent = `${Math.round(term * 100)}%`;
+      $("#price").textContent = price;
+      $("#range").textContent = `可谈区间 ${low}-${high} 元`;
+      $("#formulaText").textContent = `${origin} × ${condition.toFixed(2)} × ${demand.toFixed(2)} × ${term.toFixed(2)} = ${raw.toFixed(1)}`;
+
+      const strategy = demand > 1 ? "热门课本可先高后让" : "普通书籍建议快成交";
+      const label = condition > 0.88 ? "适合标注：近全新" : condition > 0.7 ? "适合标注：少量笔记" : "适合标注：有使用痕迹";
+      $("#chips").innerHTML = `
+        <span class="chip">${label}</span>
+        <span class="chip">推荐策略：先报 ${high} 元</span>
+        <span class="chip">底线提醒：不低于 ${low} 元</span>
+        <span class="chip">${strategy}</span>
+      `;
+      updateTalk();
+    }
+
+    const tools = {
+      dynamic: {
+        title: "动态定价工具",
+        text: "根据学期阶段、课程热度和库存变化实时调整价格。开学季需求高，价格上浮；期末清仓，价格下调，提高成交率。",
+        score: 92
+      },
+      benchmark: {
+        title: "对标检索工具",
+        text: "自动检索同校、同课程、同版本教材的成交价，帮助卖家判断自己的价格是否偏高或偏低。",
+        score: 86
+      },
+      cost: {
+        title: "成本中心工具",
+        text: "把书本原价、折旧程度、平台服务费和配送成本一起计算，给出卖家可接受的最低成交价。",
+        score: 78
+      }
+    };
+
+    document.querySelectorAll(".tab").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        const current = tools[button.dataset.tool];
+        $("#toolTitle").textContent = current.title;
+        $("#toolText").textContent = current.text;
+        $("#toolScore").textContent = `推荐指数 ${current.score}`;
+        $(".meter").style.setProperty("--score", `${current.score}%`);
+      });
+    });
+
+    const talkBank = {
+      old: [
+        "这本书确实有少量使用痕迹，所以系统已经按成色折算过价格了。现在建议价包含可谈空间，如果你今天确定要，我可以按区间下限给你。",
+        "我理解你担心新旧程度。AI 估价时已经把笔记和磨损算进去了，所以不是按原价硬卖。你如果自提，我可以再让一点。",
+        "这本不是全新，所以我没有按高价挂。它的重点是版本对、课程能用，如果你主要是上课和复习用，这个价格会比较划算。",
+        "旧的地方主要是外观，不影响阅读和做笔记。我可以按系统建议的最低区间给你，但再低就不太合理了。",
+        "你说得对，成色会影响价格，所以我这边已经做了折扣。要不这样，你今天确认的话，我按可议价区间里偏低的价格给你。",
+        "这本书有使用痕迹，但内容完整，重点页也都在。相比买新书，还是能省不少，我可以给你一个同学价。"
+      ],
+      budget: [
+        "可以理解预算问题。系统给出的底价是为了保证卖家不亏太多，我可以在建议区间里帮你压到较低价，但希望今天能直接成交。",
+        "预算有限的话，我们可以用底线价成交。这个价格已经结合原价、需求热度和学期阶段算过，算是比较稳的同学价。",
+        "如果你确定要，我可以优先按学生预算给你让一点。这个价格已经接近底线，适合快速成交。",
+        "我可以理解想省一点。这样吧，我按系统给出的下限价给你，前提是你今天能确定取书。",
+        "这本目前还是有需求的，所以不能降太多。我可以在可谈区间里给你一个更友好的价格。",
+        "如果你是本课程同学，我可以按课程互助价给你，但希望价格不要低于系统估算的底线。"
+      ],
+      compare: [
+        "如果别人那本版本和成色一样，确实可以参考。但这本是当前课程可用版本，成色也比较稳定，所以 AI 建议价会比低价帖略高一点。",
+        "可以对比，不过价格差通常来自版本、笔记完整度和急售程度。我的这本按系统建议价出售，如果你确定要，可以给你一个区间内优惠。",
+        "低价帖有可能是旧版本或者急售。我这本版本、成色和课程适配度都比较稳，所以价格会稍微更接近系统建议价。",
+        "如果你看到同版本、同成色更低的价格，可以发我参考。我这边可以在合理区间内调整，但不建议低于底线。",
+        "平台价格会波动，我这个报价是按当前需求热度和成色算的。你今天定的话，我可以按比挂牌价低一点成交。",
+        "别人便宜可能是为了快速出掉。我的这本课程匹配度高，如果你要稳妥可用，我可以给你区间内优惠。"
+      ]
+    };
+
+    let talkIndex = 0;
+    let lastTalkKey = "";
+
+    function updateTalk() {
+      const reason = document.querySelector("input[name='reason']:checked").value;
+      const price = $("#price").textContent;
+      const range = $("#range").textContent.replace("可谈区间 ", "");
+      const options = talkBank[reason];
+      const sentence = options[talkIndex % options.length];
+      $("#speechText").textContent = `${sentence} 参考价格：建议成交 ${price} 元，${range}。`;
+    }
+
+    Object.values(sliders).forEach((slider) => slider.addEventListener("input", updatePrice));
+    document.querySelectorAll("input[name='reason']").forEach((item) => item.addEventListener("change", updateTalk));
+    $("#refreshTalk").addEventListener("click", () => {
+      const reason = document.querySelector("input[name='reason']:checked").value;
+      const options = talkBank[reason];
+      if (lastTalkKey !== reason) {
+        talkIndex = 0;
+        lastTalkKey = reason;
+      }
+      talkIndex = (talkIndex + 1 + Math.floor(Math.random() * (options.length - 1))) % options.length;
+      updateTalk();
+    });
+    document.querySelectorAll("[data-jump]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelector(button.dataset.jump).scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    updatePrice();
+  </script>
+</body>
+</html>
